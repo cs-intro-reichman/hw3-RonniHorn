@@ -10,7 +10,7 @@ public class LoanCalc {
 	public static void main(String[] args) {		
 		// Gets the loan data
 		double loan = Double.parseDouble(args[0]);
-		double rate = Double.parseDouble(args[1]);
+		double rate = Double.parseDouble(args[1]) / 100;
 		int n = Integer.parseInt(args[2]);
 		System.out.println("Loan = " + loan + ", interest rate = " + rate + "%, periods = " + n);
 		double b = endBalance(loan, rate, n, epsilon);
