@@ -2,18 +2,18 @@
 public class Anagram {
 	public static void main(String args[]) {
 		// Tests the isAnagram function.
-		System.out.println(isAnagram("silent","listen"));  // true
-		System.out.println(isAnagram("William Shakespeare","I am a weakish speller")); // true
-		System.out.println(isAnagram("Madam Curie","Radium came")); // true
-		System.out.println(isAnagram("Tom Marvolo Riddle","I am Lord Voldemort")); // true
+		 System.out.println(isAnagram("silent","listen"));  // true
+		 System.out.println(isAnagram("William Shakespeare","I am a weakish speller")); // true
+		 System.out.println(isAnagram("Madam Curie","Radium came")); // true
+		 System.out.println(isAnagram("Tom Marvolo Riddle","I am Lord Voldemort")); // true
 
 		// Tests the preProcess function.
 		System.out.println(preProcess("What? No way!!!"));
 		
-		// Tests the randomAnagram function.
-		System.out.println("silent and " + randomAnagram("silent") + " are anagrams.");
+		// // Tests the randomAnagram function.
+		 System.out.println("silent and " + randomAnagram("silent") + " are anagrams.");
 		
-		// Performs a stress test of randomAnagram 
+		// // Performs a stress test of randomAnagram 
 		String str = "1234567";
 		Boolean pass = true;
 		//// 10 can be changed to much larger values, like 1000
@@ -28,22 +28,58 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+		str1 = preProcess(str1);
+		str2 = preProcess(str2);
+		int count = 0;
+		char current = 'c';
+		for(int i = 0; i<str1.length(); i++)
+		{
+			current = str1.charAt(i);
+			for(int j = 0; j<str2.length(); j++)
+			{
+				if(current == str2.charAt(j))
+				{
+					count++;
+					j = str2.length();
+				}
+			}
+		}
+		return (count == str1.length());
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
-	// to lower-case, and all the other characters are deleted, except for spaces, which are left
-	// as is. For example, the string "What? No way!" becomes "whatnoway"
+// to lower-case, and all the other characters are deleted.
+// For example, the string "What? No way!" becomes "whatnoway"
+
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
+		str = str.toLowerCase();
+		String newString = "";
+		for(int i = 0; i<str.length(); i++)
+		{
+			if((str.charAt(i)>=97) && (str.charAt(i)<=122))
+			{
+				newString = newString+str.charAt(i);
+			}	
+		}
+		return newString;
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		int length = str.length();
+		int random = length;
+		char c = ' ';
+		String newString = "";
+		while(length > 0)
+		{
+			random = (int)(Math.random()* random);
+			c = str.charAt(random);
+			newString = newString + c;
+			str = str.substring(0, random) + str.substring(random + 1,length);
+			length--;
+
+		}
+		return newString;
 	}
 }
