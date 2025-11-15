@@ -25,43 +25,171 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int sum = x1;
+		if(x2<0){
+			for(int i = x2; i<0; i++)
+			{
+				sum--;
+			}
+			return sum;
+		}
+		for(int i = 0; i<x2; i++)
+		{
+			sum++;
+		}
+		return sum;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int sum = x1;
+		if(x2<0){
+			if(x1<0)
+			{
+				for(int i = x2; i<0; i++)
+				{
+					sum++;
+				}
+				return sum;
+			}
+			for(int i = x2; i<0; i++)
+			{
+				sum++;
+			}
+			return sum;
+		}
+		if(x1<0)
+		{
+			for(int i = 0; i<x2; i++)
+			{
+				sum--;
+			}
+			return sum;
+		}
+		for(int i = 0; i<x2; i++)
+		{
+			sum--;
+		}
+		return sum;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int sum = 0;
+		if(x1>0 && x2>0)
+		{
+			for(int i = 0; i<x1; i++)
+			{
+				sum = plus(sum, x2);
+			}
+			return sum;
+		}
+		if(x1>0 && x2<0)
+		{
+			for(int i = 0; i<x1; i++)
+			{
+				sum = plus(sum,x2);
+			}
+			return sum;
+		}
+		if(x1<0 && x2>0)
+		{
+			for(int i = 0; i<x2; i++)
+			{
+				sum = plus(sum, x1);
+			}
+			return sum;
+		}
+		if(x1<0 && x2<0)
+		{
+			for(int i = x1; i<0; i++)
+			{
+				sum = minus(sum,x2);
+			}
+			return sum;
+		}
+		return sum;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		int p = x;
+		if(n == 0)
+			return 1;
+		if(n == 1)
+			return x;
+		for(int i = 1; i<n; i++)
+		{
+			p = times(p,x);
+		}
+		return p;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
+		int i = 0;
+		int p = 0;
+		boolean change = false;
+		if(x1<0)
+		{
+			x1 = minus(0,x1);
+			change = true;
+		}
+		if(x2<0)
+		{
+			x2 = minus(0,x2);
+			if(change == true)
+				change = false;
+			else
+				change = true;
+		}
+		if(x1>x2)
+		{
+			p = x2;
+			while(p<=x1)
+			{
+				p = plus(p, x2);
+				i++;
+			}
+			if(change == true)
+				return -i;
+			return i;
+		}
+		if(x1 == x2)
+		{
+			if(change == true)
+				return -i;
+			return i;
+		}
 		return 0;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
+		int divider = div(x1,x2);
+		if((x1>x2) && x2>0)
+			return minus(x1, times(x2,divider));
+		if((x1<x2) && x1>0)
+			return x1;
+		if((x1>x2) && x1<0)
+			return x1;
+		if((x1<x2) && x2<0)
+			return plus(x1, times(x2, divider));
+
 		return 0;
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
+		if(x<0)
+			return 0;
+		int p = 1;
+		int i = 1;
+		while(p!=(i-1))
+		{
+			p = div(x, i);
+			i++;
+		}
+		return p;
 	}	  	  
 }
