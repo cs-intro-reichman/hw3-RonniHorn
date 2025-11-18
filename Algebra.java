@@ -181,15 +181,12 @@ public class Algebra {
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		if(x<0)
-			return 0;
-		int p = 1;
-		int i = 1;
-		while(p!=(i-1))
+		int i = 0;
+		while(pow(i,2) <= x)
 		{
-			p = div(x, i);
 			i++;
 		}
-		return p;
+		
+		return i-1;
 	}	  	  
 }
